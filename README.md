@@ -12,6 +12,10 @@ If you run `timeui` with root privileges it'll display also CPU and memory usage
 
 The easiest way to give `timeui` a try is clone the repo and from the command line run `sudo run-demo.sh`.
 
+## Installation
+
+In the repo root folder run `install.sh` which builds `timeui` and copies it over into `/usr/local/bin`.
+
 ## Contributing
 
 This tool was put in just few hours time, here's the live [twitter thread](https://twitter.com/icanzilb/status/1494577864028663810) with progress updates. 
