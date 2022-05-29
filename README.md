@@ -14,7 +14,11 @@ The easiest way to give `timeui` a try is clone the repo and from the command li
 
 ## Installation
 
-In the repo root folder run `install.sh` which builds `timeui` and copies it over into `/usr/local/bin`.
+1. `git clone https://github.com/icanzilb/timeui`
+1. `cd timeui`
+1. `./install.sh`
+
+Once the tool is installed (in /usr/local/bin) you can start it from any location on your mac.
 
 ## Contributing
 
