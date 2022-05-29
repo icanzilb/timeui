@@ -47,18 +47,6 @@ struct TimerWindow: View {
 			didFail = true
 		}
 		.ignoresSafeArea()
-		.background(
-			LinearGradient(
-				gradient: Gradient(
-					colors: [
-						Color(hex: 0x5969F8),
-						Color(hex: 0x8735F9)
-					]
-				),
-				startPoint: .top,
-				endPoint: .bottom
-			)
-		)
 		.padding(0)
 	}
 }

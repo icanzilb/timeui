@@ -67,7 +67,7 @@ class App {
         )
 
         window.center()
-        window.title = title
+        window.title = "▶  " + title
         window.titlebarAppearsTransparent = true
         window.makeKeyAndOrderFront(window)
 

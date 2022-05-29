@@ -67,5 +67,10 @@ class Runner {
 
         onTerminated?()
         onTerminated = nil
+
+        Task { @MainActor in
+            App.shared.application.mainWindow?.title = "✔ Finished."
+        }
+
     }
 }

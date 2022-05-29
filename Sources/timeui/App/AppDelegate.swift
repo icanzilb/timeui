@@ -36,6 +36,18 @@ class ApplicationDelegate: NSObject, NSApplicationDelegate {
 			rootView: TimerWindow()
 				.ignoresSafeArea()
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(
+                    LinearGradient(
+                        gradient: Gradient(
+                            colors: [
+                                Color(hex: 0x5969F8),
+                                Color(hex: 0x8735F9)
+                            ]
+                        ),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
 		)
 	}
 }

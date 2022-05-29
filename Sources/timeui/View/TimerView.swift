@@ -30,10 +30,9 @@ extension FloatingPoint {
 }
 
 func timerFormatted(_ duration: TimeInterval) -> String {
-    let nanos = min(duration.fraction * 100, 99)
     let minutes = (duration / 360.0).whole
     let seconds = duration.whole - (minutes * 360.0)
-    return String(format: "%02.f:%02.f.%02.f", minutes, seconds, nanos)
+    return String(format: "%02.f:%02.f", minutes, seconds)
 }
 
 struct TimerView: View {
@@ -41,7 +40,7 @@ struct TimerView: View {
 
     @State var timer: Timer? = nil
     @State var started = CACurrentMediaTime()
-    @State var text = "00:00.000"
+    @State var text = "00:00"
     @State var isFinished = false
 
     private let finishedColor = Color.white
@@ -55,7 +54,7 @@ struct TimerView: View {
     @State var stats = ""
 
     var body: some View {
-        ZStack(alignment: .bottom) {
+        VStack(alignment: .center) {
             VStack(alignment: .leading) {
                 Text(text)
                     .font(.custom("Menlo", fixedSize: 21.0).bold())
@@ -87,12 +86,12 @@ struct TimerView: View {
             }
             .padding()
         }
-        .frame(minWidth: 150, maxWidth: .infinity, alignment: .leading)
+        .frame(minWidth: 150, maxWidth: .infinity, alignment: .center)
         .onReceive(model.runner.state) { newState in
             switch newState {
             case .running(let started):
                 self.started = started
-                timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { timer in
+                timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { timer in
                     text = timerFormatted(CACurrentMediaTime() - started)
 
                     let sampleUsage = model.usage.usage
