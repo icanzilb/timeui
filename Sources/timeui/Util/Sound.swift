@@ -21,10 +21,20 @@
 // SOFTWARE.
 
 import Foundation
+import AppKit
 
-class RunnerModel: ObservableObject {
-	let runner = Runner()
-	var logDataSource: LogDataSource?
-	let usage = PerformanceCalculator()
-    var arguments = [String]()
+extension Task where Failure == Never, Success == Never {
+    static func sleep(seconds duration: TimeInterval) async throws {
+        try await sleep(nanoseconds: UInt64(duration * 1_000_000_000))
+    }
+}
+
+enum Sound {
+    static func alert() {
+        guard let hero = NSSound(named: NSSound.Name("Hero")) else {
+            NSSound.beep()
+            return
+        }
+        hero.play()
+    }
 }

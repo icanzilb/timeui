@@ -53,8 +53,19 @@ struct TimerView: View {
     @State var regionsCancellable: AnyCancellable?
     @State var stats = ""
 
+    @State var dingEnabled = false
+    @State var dingSet = false
+    @State var isHovering = false
+
     var body: some View {
-        VStack(alignment: .center) {
+        ZStack(alignment: .top) {
+            HStack {
+                Spacer()
+                if dingSet || isHovering {
+                    DingToggleView(isOn: $dingEnabled)
+                }
+            }
+
             VStack(alignment: .leading) {
                 Text(text)
                     .font(.custom("Menlo", fixedSize: 21.0).bold())
@@ -86,6 +97,15 @@ struct TimerView: View {
             }
             .padding()
         }
+        .onHover(perform: { over in
+            isHovering = over
+        })
+        .onAppear(perform: {
+            if model.arguments.contains("--ding") {
+                dingSet = true
+                dingEnabled = true
+            }
+        })
         .frame(minWidth: 150, maxWidth: .infinity, alignment: .center)
         .onReceive(model.runner.state) { newState in
             switch newState {
@@ -105,6 +125,10 @@ struct TimerView: View {
                 timer?.invalidate()
                 text = timerFormatted(duration)
                 isFinished = true
+
+                if dingEnabled || model.arguments.contains("--ding") {
+                    Sound.alert()
+                }
             default: break
             }
         }
@@ -112,7 +136,6 @@ struct TimerView: View {
             if let source = dataSource {
                 regionsCancellable = source.regionsSubject
                     .sink(receiveValue: { newRegions in
-                        //print(newRegions)
                         regions = source.regionOrder.map {
                             newRegions[$0]!
                         }

@@ -20,11 +20,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-class RunnerModel: ObservableObject {
-	let runner = Runner()
-	var logDataSource: LogDataSource?
-	let usage = PerformanceCalculator()
-    var arguments = [String]()
+struct DingToggleView: View {
+    @Binding var isOn: Bool
+
+    var body: some View {
+        HStack {
+            Button(action: {
+                isOn.toggle()
+            }, label: {
+                Image(systemName: isOn ? "speaker.circle.fill" : "speaker.slash.circle")
+                    .foregroundColor(Color(hex: 0xcccccc))
+                    .font(.title3)
+            })
+            .buttonStyle(.borderless)
+            .padding(.top, 4)
+        }
+        .padding()
+    }
 }
