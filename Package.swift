@@ -4,6 +4,7 @@ import PackageDescription
 let package = Package(
     name: "timeui",
     platforms: [.macOS(.v11)],
+    products: [.executable(name: "timeui", targets: ["timeui"])],
     targets: [
         .executableTarget(
             name: "test-app"
