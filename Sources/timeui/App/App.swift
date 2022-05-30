@@ -100,6 +100,8 @@ class App {
         }
 
         targetURL = url
+
+        model.arguments = Array(CommandLine.arguments.dropFirst())
     }
 
     func startRunner() throws {
