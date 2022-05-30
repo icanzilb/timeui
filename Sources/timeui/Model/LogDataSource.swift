@@ -126,10 +126,15 @@ class LogDataSource: Equatable {
 	private var lastTimestamp: TimeInterval = -1
 
 	func run(pid: Int32) {
-		timerSubscription = Timer.publish(every: 0.2, tolerance: nil, on: .main, in: .common, options: nil)
+        timerSubscription = Timer.publish(every: 1.0, tolerance: nil, on: .main, in: .common, options: nil)
 			.autoconnect()
 			.sink(receiveValue: { _ in
 				self.fetchLogs(forPID: pid)
 			})
 	}
+
+    func stop() {
+        timerSubscription?.cancel()
+        timerSubscription = nil
+    }
 }
