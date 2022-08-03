@@ -20,6 +20,12 @@ The easiest way to give `timeui` a try is clone the repo and from the command li
 
 Once the tool is installed (in /usr/local/bin) you can start it from any location on your mac.
 
+## Features
+
+If you run `timeui` with sudo the app will display data about CPU and RAM usage.
+
+Use `--ding` command line parameter or toggle the speaker button in the UI to play sound when the watched process completes.
+
 ## Contributing
 
 This tool was put in just few hours time, here's the live [twitter thread](https://twitter.com/icanzilb/status/1494577864028663810) with progress updates. 

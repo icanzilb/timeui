@@ -100,15 +100,25 @@ class App {
         }
 
         targetURL = url
+
+        model.arguments = Array(CommandLine.arguments.dropFirst())
     }
 
     func startRunner() throws {
         let pid = try model.runner.run(targetURL, terminated: {
             self.model.usage.stop()
+            self.model.logDataSource?.stop()
+            self.model.logDataSource = nil
         })
 
         model.logDataSource = LogDataSource()
-        model.logDataSource!.run(pid: pid)
-        model.usage.run(pid: pid)
+
+        // TODO: Research if better way to check for sudo
+        if ProcessInfo.processInfo.environment["SUDO_COMMAND"] != nil {
+            // Start gathering advanced stats
+            print("Sudo enabled metrics on")
+            model.logDataSource!.run(pid: pid)
+            model.usage.run(pid: pid)
+        }
     }
 }
